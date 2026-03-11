@@ -11,7 +11,7 @@ public class Armes {
         this.damage = damage;
         this.type = type;
     }
-
+    
     public void setName(String name){
         this.name = name;
     }
@@ -42,5 +42,11 @@ public class Armes {
 
     public String getType(){
         return this.type;
+    }
+
+    public String toStringArmes(){
+        String infoArmes;
+        infoArmes = "Name: " + name + " | Is Magic: " + isMagic + " | Damage: " + damage + " | Type: " + type;
+        return infoArmes;
     }
 }
