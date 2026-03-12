@@ -32,8 +32,13 @@ public class joc {
             else{
                 controlPlayer = 0;
             }
-        } while(arrayPersonatge.get(0).getHealth() != 0 && arrayPersonatge.get(1).getHealth() != 0);
-            
+        } while(arrayPersonatge.get(0).getHealth() > 0 && arrayPersonatge.get(1).getHealth() > 0);
+            if(arrayPersonatge.get(0).getHealth() < 0){
+                System.out.println("The winner is " + arrayPersonatge.get(1).getName());
+            }
+            else{
+                System.out.println("The winner is " + arrayPersonatge.get(0).getName());
+            }
     }
 
     public void menu(int controlPlayer){
@@ -187,7 +192,7 @@ public class joc {
 
     public void atac(int controlPlayer, boolean defendPlayer1, boolean defendPlayer2){
         double damage = arrayPersonatge.get(controlPlayer).atac();
-        if(arrayPersonatge.get(controlPlayer).dodge() == false){
+        //if(arrayPersonatge.get(controlPlayer).dodge() == false){
             if(controlPlayer == 0 && defendPlayer2){
                 damage = arrayPersonatge.get(1).defendDamage(damage);
                 arrayPersonatge.get(1).setDamage(damage);
@@ -199,7 +204,7 @@ public class joc {
                 arrayPersonatge.get(0).setDamage(damage);
                 defendPlayer1 = false;
             }
-        }
+        //}
         System.out.println("You deal " + damage + " to the other player. His stats are now: " );
         if(controlPlayer == 0){
            System.out.println(arrayPersonatge.get(1).getHealth());

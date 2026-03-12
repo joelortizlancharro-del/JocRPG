@@ -30,21 +30,21 @@ public class Personatges {
         this.health = constitution*50;
         this.mana = intelligence*30;
       
-        weapons.add(new Armes("Excalibur", true, 35, "Sword"));     
-        weapons.add(new Armes("Iron Sword", false, 18, "Sword"));   
-        weapons.add(new Armes("Dragon Slayer", true, 40, "Sword")); 
+        weapons.add(new Armes("Excalibur", true, 50, "Sword"));     
+        weapons.add(new Armes("Iron Sword", false, 28, "Sword"));   
+        weapons.add(new Armes("Dragon Slayer", true, 50, "Sword")); 
 
-        weapons.add(new Armes("Hunter Bow", false, 20, "Bow"));      
-        weapons.add(new Armes("GodSlayer", true, 36, "Bow"));       
-        weapons.add(new Armes("Elven Bow", true, 34, "Bow"));      
+        weapons.add(new Armes("Hunter Bow", false, 80, "Bow"));      
+        weapons.add(new Armes("GodSlayer", true, 46, "Bow"));       
+        weapons.add(new Armes("Elven Bow", true, 44, "Bow"));      
 
-        weapons.add(new Armes("Apprentice Staff", false, 16, "Staff")); 
-        weapons.add(new Armes("Arcane Staff", true, 35, "Staff"));      
-        weapons.add(new Armes("Ancient Staff", true, 42, "Staff"));     
+        weapons.add(new Armes("Apprentice Staff", false, 26, "Staff")); 
+        weapons.add(new Armes("Arcane Staff", true, 45, "Staff"));      
+        weapons.add(new Armes("Ancient Staff", true, 52, "Staff"));     
 
-        weapons.add(new Armes("Woodcutter Axe", false, 22, "Axe"));     
-        weapons.add(new Armes("Battle Axe", false, 25, "Axe"));        
-        weapons.add(new Armes("Doom Axe", true, 38, "Axe"));           
+        weapons.add(new Armes("Woodcutter Axe", false, 32, "Axe"));     
+        weapons.add(new Armes("Battle Axe", false, 35, "Axe"));        
+        weapons.add(new Armes("Doom Axe", true, 48, "Axe"));           
 
     }
 
