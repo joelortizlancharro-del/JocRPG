@@ -29,22 +29,22 @@ public class Personatges {
         this.actualWeapon = actualWeapon;
         this.health = constitution*50;
         this.mana = intelligence*30;
+      
+        weapons.add(new Armes("Excalibur", true, 35, "Sword"));     
+        weapons.add(new Armes("Iron Sword", false, 18, "Sword"));   
+        weapons.add(new Armes("Dragon Slayer", true, 40, "Sword")); 
 
-        weapons.add(new Armes("Excalibur", true, 20, "Sword"));
-        weapons.add(new Armes("Iron Sword", false, 10, "Sword"));
-        weapons.add(new Armes("Dragon Slayer", true, 25, "Sword"));
+        weapons.add(new Armes("Hunter Bow", false, 20, "Bow"));      
+        weapons.add(new Armes("GodSlayer", true, 36, "Bow"));       
+        weapons.add(new Armes("Elven Bow", true, 34, "Bow"));      
 
-        weapons.add(new Armes("Hunter Bow", false, 11, "Bow"));
-        weapons.add(new Armes("GodSlayer", true, 18, "Bow"));
-        weapons.add(new Armes("Elven Bow", true, 16, "Bow"));
+        weapons.add(new Armes("Apprentice Staff", false, 16, "Staff")); 
+        weapons.add(new Armes("Arcane Staff", true, 35, "Staff"));      
+        weapons.add(new Armes("Ancient Staff", true, 42, "Staff"));     
 
-        weapons.add(new Armes("Apprentice Staff", false, 9, "Staff"));
-        weapons.add(new Armes("Arcane Staff", true, 17, "Staff"));
-        weapons.add(new Armes("Ancient Staff", true, 21, "Staff"));
-
-        weapons.add(new Armes("Woodcutter Axe", false, 12, "Axe"));
-        weapons.add(new Armes("Battle Axe", false, 15, "Axe"));
-        weapons.add(new Armes("Doom Axe", true, 23, "Axe"));
+        weapons.add(new Armes("Woodcutter Axe", false, 22, "Axe"));     
+        weapons.add(new Armes("Battle Axe", false, 25, "Axe"));        
+        weapons.add(new Armes("Doom Axe", true, 38, "Axe"));           
 
     }
 
@@ -102,6 +102,10 @@ public class Personatges {
          this.mana = this.intelligence*30;
     }
 
+    public void setDamage(double damage){
+        this.health -= damage;
+    }
+
     public int getIntelligence(){
         return this.intelligence;
     }
@@ -150,6 +154,43 @@ public class Personatges {
 
     public void equipWeapon(Armes weapon){
         this.actualWeapon = weapon;
+    }
+
+    public void regenHealth(){
+        this.health += this.constitution*3;
+    }
+
+    public void regenMana(){
+        this.mana += this.intelligence*2;
+    }
+
+    public boolean dodge(){
+        boolean finalDodge;
+        double probabilityDodge = (this.dexterity - 5) * 3.33;
+        double randomNumber = 1 + Math.random() * 99;
+        if(randomNumber <= probabilityDodge){
+            finalDodge = true;
+        }
+        else{
+            finalDodge = false;
+        }
+        return finalDodge;   
+    }
+
+    public double atac(){
+        double damageDealth;
+        if(!actualWeapon.getIsMagic()){
+          damageDealth = this.strength * (1 + actualWeapon.getDamage() / 100);
+        }
+        else{
+            damageDealth = actualWeapon.getDamage() * intelligence / 100;
+        }
+        return damageDealth;
+    }
+
+    public double defendDamage(double damageReceived){
+         damageReceived = damageReceived /2;
+        return damageReceived;
     }
 
     public String toString(){

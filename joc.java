@@ -11,6 +11,8 @@ public class joc {
     }
     public void principal(){
         int controlPlayer = 0;
+        boolean defendPlayer1 = true;
+        boolean defendPlayer2 = true;
         System.out.println("Welcome to the game! \nFirst you have to create two characters! \n");
         do {
             createCharacter(arrayPersonatge, controlPlayer);
@@ -21,8 +23,16 @@ public class joc {
           int weaponInHand = chooseWeapon(controlPlayer);
           System.out.println(arrayPersonatge.get(controlPlayer).toString());
             menu(controlPlayer);
-            whatToDo(arrayPersonatge); 
-        } while (arrayPersonatge.get(0).getHealth() != 0 && arrayPersonatge.get(1).getHealth() != 0);
+            whatToDo(arrayPersonatge, controlPlayer, defendPlayer1, defendPlayer2); 
+            healHPAndMana();
+
+            if(controlPlayer == 0){
+                controlPlayer = 1;
+            }
+            else{
+                controlPlayer = 0;
+            }
+        } while(arrayPersonatge.get(0).getHealth() != 0 && arrayPersonatge.get(1).getHealth() != 0);
             
     }
 
@@ -34,7 +44,8 @@ public class joc {
         System.out.println("============");
     }
 
-    public void whatToDo(ArrayList<Personatges> ArrayPersonatge){
+    public void whatToDo(ArrayList<Personatges> ArrayPersonatge, int controlPlayer, boolean defendPlayer1, boolean defendPlayer2){
+        System.out.println("Turn of the player " + arrayPersonatge.get(controlPlayer));
         int option = 0;
         do {
             System.out.println("What you want to do?");
@@ -46,10 +57,13 @@ public class joc {
         } while (option > 2 || option < 1);
         switch (option) {
             case 1:
-                System.out.println("You want to atac.");
-                //createCharacter(ArrayPersonatge);
+                System.out.println("You want to attack.");
+                atac(controlPlayer, defendPlayer1, defendPlayer2);
                 break;
         
+            case 2:
+                System.out.println("You want to defend");
+                defend(controlPlayer, defendPlayer1, defendPlayer2);
             default:
                 break;
         }
@@ -170,7 +184,47 @@ public class joc {
         return weaponChoosen;
         
     }
+
+    public void atac(int controlPlayer, boolean defendPlayer1, boolean defendPlayer2){
+        double damage = arrayPersonatge.get(controlPlayer).atac();
+        if(arrayPersonatge.get(controlPlayer).dodge() == false){
+            if(controlPlayer == 0 && defendPlayer2){
+                damage = arrayPersonatge.get(1).defendDamage(damage);
+                arrayPersonatge.get(1).setDamage(damage);
+                defendPlayer2 = false;
+        }
+        
+            if(controlPlayer == 1 && defendPlayer1){
+                damage = arrayPersonatge.get(0).defendDamage(damage);
+                arrayPersonatge.get(0).setDamage(damage);
+                defendPlayer1 = false;
+            }
+        }
+        System.out.println("You deal " + damage + " to the other player. His stats are now: " );
+        if(controlPlayer == 0){
+           System.out.println(arrayPersonatge.get(1).getHealth());
+        }
+        else{
+            System.out.println(arrayPersonatge.get(0).getHealth());
+        }
+    }
+
+    public void defend(int controlPlayer, boolean defendPlayer1, boolean defendPlayer2){
+        if (controlPlayer == 0){
+            defendPlayer1 = true;
+        }
+        else if(controlPlayer == 1){
+            defendPlayer2 = true;
+        }
+    }
     
+    public void healHPAndMana(){
+        arrayPersonatge.get(0).regenHealth();
+        arrayPersonatge.get(0).regenMana();
+        arrayPersonatge.get(1).regenHealth();
+        arrayPersonatge.get(1).regenMana();
+    }
+
     public int controlErrorInt(){
         int num = -1;
         try {
