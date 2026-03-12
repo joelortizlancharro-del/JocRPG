@@ -14,8 +14,9 @@ public class Personatges {
     private int age;
     private String race;
     private ArrayList<Armes> weapons = new ArrayList<>();
+    private Armes actualWeapon;
 
-    public Personatges(String name, int age, String race, int strength, int dexterity, int constitution, int intelligence, int wisdom, int charisma, double health, double mana){
+    public Personatges(String name, int age, String race, int strength, int dexterity, int constitution, int intelligence, int wisdom, int charisma, Armes actualWeapon, double health, double mana){
         this.name = name;
         this.age = age;
         this.race = race;
@@ -25,6 +26,7 @@ public class Personatges {
         this.intelligence = intelligence;
         this.wisdom = wisdom;
         this.charisma = charisma;
+        this.actualWeapon = actualWeapon;
         this.health = constitution*50;
         this.mana = intelligence*30;
 
@@ -132,17 +134,36 @@ public class Personatges {
         weapons.add(weapon);
     }
 
-    public void getWeapons(){
+    public void seeAllWeapons(){
       for(int i = 0; i < weapons.size(); i++){
         System.out.println("Weapon " + (i+1) + ": " + weapons.get(i).toStringArmes());
       }
     }
+
+    public Armes getWeapon(){
+        return this.actualWeapon;
+    }
+    
+    public ArrayList<Armes> getWeapons(){
+    return this.weapons;
+}
+
+    public void equipWeapon(Armes weapon){
+        this.actualWeapon = weapon;
+    }
+
     public String toString(){
+
        String info;
        info = " Name:" + name + "\n Age:" + age + "\n Race:" + race + 
         "\n Strength:" + strength + "\n Dexterity:" + dexterity + 
         "\n Constitution:" + constitution + "\n Intelligence:" + intelligence + 
         "\n Wisdom:" + wisdom + "\n Charisma:" + charisma + "\n Health:" + health + "\n Mana:" + mana;
+         if(actualWeapon != null){
+        info += "\nActual Weapon: " + actualWeapon.toStringArmes();
+    } else {
+        info += "\nActual Weapon: None";
+    };
 
        return info;
     }
